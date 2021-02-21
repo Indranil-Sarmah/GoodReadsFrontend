@@ -9,8 +9,8 @@ const Layout = ({
 }) => (
     <div>
         <Menu />
-        <div className="jumbotron">
-            <h2>{title}</h2>
+        <div className="text-center mt-3 text-light">
+            <h2 >{title}</h2>
             <p className="lead">{description}</p>
         </div>
         <div className={className}>{children}</div>
