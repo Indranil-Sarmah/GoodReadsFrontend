@@ -13,7 +13,7 @@ const isActive = (history, path) => { //show the current navigation tab
 const Menu = ({ history })=>{
     return(
     <div>
-    <ul className="nav nav-tabs bg-primary ">
+    {/* <ul className="nav nav-tabs navbar-expand-lg navbar-dark bg-dark pt-2 pb-2">
         <li className="nav-item nav-link font-weight-bold">
             GoodReads 
         </li>
@@ -46,7 +46,47 @@ const Menu = ({ history })=>{
                 Signup
             </Link>
         </li>
-    </ul>
+    </ul> */}
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a className="navbar-brand font-weight-bold" href="#">GoodReads</a>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+        </button>
+            <div className="collapse navbar-collapse" id="navbarColor01">
+                <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                        <Link
+                            className="nav-link"
+                            style={isActive(history, "/")}
+                            to="/"
+                        >
+                            Home
+                        </Link>
+                    </li>
+
+                <li className="nav-item">
+                        <Link
+                            className="nav-link"
+                            style={isActive(history, "/signin")}
+                            to="/signin"
+                        >
+                            Signin
+                        </Link>
+                    </li>
+
+                <li className="nav-item">
+                        <Link
+                            className="nav-link"
+                            style={isActive(history, "/signup")}
+                            to="/signup"
+                        >
+                            Signup
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+</nav>
+
     </div>
 )
 }
