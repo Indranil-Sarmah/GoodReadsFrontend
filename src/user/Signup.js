@@ -11,11 +11,39 @@ const Signup = () => {
         success: false
     });
 
+    const { name, email, password } = values; //destructuring it
+
     const handleChange = name => event => { //higher oder function : function returning another function , here name is the name of the state(name,email,password) and event is what event it is currently perfoming
         setValues({ ...values, error: false, [name]: event.target.value }); //to set the state we will use the setValues  method(... is rest operator , to grab the rest of the value)
     };
 
+    //************************************************* */
+    //this signup method will insert the data into backend database
+    const signup = user => {
+        fetch(`${API}/signup`, { //fetch the signup route of Backend API(which we haver already defined) or use axios as well
+            method: "POST", //what type request defined in the API
+            headers: {  //default set headers from the Accept type and Content-type
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)//convert the javascipt object in string fomat 
+        })
+            .then(response => {  //after sending the data server will response something : in response object (correct resp or it might be error)
+                return response.json(); // for correct response if data submitted successfully 
+            })
+            .catch(err => {
+                console.log(err); //response an error if worng data submitted
+            });
+    };
+    //*****************************************************************/
+
+    const clickSubmit = event => {  //this method will fired when submit button is pressed in the form
+        event.preventDefault();
+        signup({ name, email, password }); //call the ultimate metod which will talk to our database using the user object as a parameter
+    };
+
     const signUpForm = () => (
+        <div>
         <form>
             <div className="form-group">
                 <label className="text-light">Name</label>
@@ -43,8 +71,10 @@ const Signup = () => {
                     className="form-control"
                 />
             </div>
-            <button className="btn btn-primary">Submit</button>
+            <button onClick={clickSubmit} className="btn btn-primary">Submit</button>
         </form>
+        <div className="text-sm-right text-primary">createdBy@Indranil2020-21</div>
+        </div>
     );
 
     return (
