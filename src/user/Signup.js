@@ -1,7 +1,8 @@
 import React, { useState } from "react"; //hook useState from react
 import { Link } from "react-router-dom"; //to link the signin component
 import Layout from "../core/Layout";
-import { API } from "../config";
+import {signup} from '../auth/index'
+
 
 const Signup = () => {
     const [values, setValues] = useState({  // create useState as an object which contains differnt values
@@ -18,27 +19,30 @@ const Signup = () => {
         setValues({ ...values, error: false, [name]: event.target.value }); //to set the state we will use the setValues  method(... is rest                                                                  operator , to grab the rest of the value)
     };
 
-    //************************************************* */
-    //this signup method will insert the data into backend database
+    
 
-    const signup = user => {
-        return fetch(`${API}/signup`, {     // fetch the signup route of Backend API(which we haver already defined) or use axios as well , we need to return the fetch otherwise we will get .then undefined 
-            method: "POST",     //what type request defined in the API
-            headers: {          //default set headers from the Accept type and Content-type
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(user)      //convert the javascipt object in string fomat 
-        })
-            .then(response => {
-                return response.json();  //after sending the data server will response something : in response object (correct resp or it might be error)
-            })
-            .catch(err => {
-                console.log(err);  //response an error if worng data submitted
-            });
-    };
+    // //************************************************* */
+    // //************ signup method is coming from auth ************************** */
+    // //this signup method will insert the data into backend database
 
-    //*****************************************************************/
+    // const signup = user => {
+    //     return fetch(`${API}/signup`, {     // fetch the signup route of Backend API(which we haver already defined) or use axios as well , we need to return the fetch otherwise we will get .then undefined 
+    //         method: "POST",     //what type request defined in the API
+    //         headers: {          //default set headers from the Accept type and Content-type
+    //             Accept: "application/json",
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(user)      //convert the javascipt object in string fomat 
+    //     })
+    //         .then(response => {
+    //             return response.json();  //after sending the data server will response something : in response object (correct resp or it might be error)
+    //         })
+    //         .catch(err => {
+    //             console.log(err);  //response an error if worng data submitted
+    //         });
+    // };
+
+    // //*****************************************************************/
 
 
     const clickSubmit = event => {      //this method will fired when submit button is pressed in the form
@@ -122,7 +126,7 @@ const Signup = () => {
     return (
         <Layout
             title="Signup" 
-            description="Signup to Node React E-commerce App"
+            description="Signup to GoodReads : An E-commerce App"
             className="container col-md-8 offset-md-2"  //to make the form center alling
         >
             {showSuccess()}

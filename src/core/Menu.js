@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link,withRouter} from 'react-router-dom'
+import { signout } from "../auth";
 
 const isActive = (history, path) => { //show the current navigation tab 
     if (history.location.pathname === path) { //browser functionality
@@ -82,7 +83,21 @@ const Menu = ({ history })=>{
                         >
                             Signup
                         </Link>
-                    </li>
+                </li>
+                <li className="nav-item">
+                <span
+                    className="nav-link text-light"
+                    style={{ cursor: "pointer", color: "#de870d" }}
+                    onClick={() =>
+                        signout(() => {
+                            history.push("/");
+                        })
+                    }
+                >
+                    Signout
+                </span>
+                </li>
+
                 </ul>
             </div>
 </nav>
