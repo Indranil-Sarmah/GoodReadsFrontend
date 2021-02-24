@@ -57,9 +57,9 @@ export const authenticate = (data, next) => {
 /*****************SignOut method**************************************/
 export const signout = next => {
         if (typeof window !== "undefined") {
-            localStorage.removeItem("jwt"); //clear the local storage
-            next();
-            return fetch(`${API}/signout`, {  //hit the backend api to remove the token/cookie
+            localStorage.removeItem("jwt"); //clear the local storage using remove item
+            next(); //redicrect to the homepage 
+            return fetch(`${API}/signout`, {  //hit the backend api to remove the token/cookie //fetch take two args (routes and method)
                 method: "GET"
             })
                 .then(response => { //server will response someting : succes OR error
@@ -69,3 +69,19 @@ export const signout = next => {
         }
 };
 /******************************************************/
+
+/****************************isAuthendticated is method signIn users******************** */
+
+export const isAuthenticated = () => {
+    if (typeof window == "undefined") {
+        return false;
+    }
+    if (localStorage.getItem("jwt")) { //check if user is signedin
+        return JSON.parse(localStorage.getItem("jwt"));
+    } else {
+        return false;  //user is not siged in
+    }
+};
+
+
+/***************** */

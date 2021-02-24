@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link,withRouter} from 'react-router-dom'
-import { signout } from "../auth";
+import { signout,isAuthenticated } from "../auth";
 
 const isActive = (history, path) => { //show the current navigation tab 
     if (history.location.pathname === path) { //browser functionality
@@ -55,6 +55,7 @@ const Menu = ({ history })=>{
         </button>
             <div className="collapse navbar-collapse" id="navbarColor01">
                 <ul className="navbar-nav mr-auto">
+              
                 <li className="nav-item">
                         <Link
                             className="nav-link"
@@ -64,6 +65,20 @@ const Menu = ({ history })=>{
                             Home
                         </Link>
                     </li>
+                
+                
+                 <li className="nav-item">
+                         <Link
+                          className="nav-link"
+                         style={isActive(history, "/dashboard")}
+                        to="/dashboard"
+                  >
+                    Dashboard
+                        </Link>
+               </li>
+
+            {!isAuthenticated() && ( //conditional link display
+                <>
 
                 <li className="nav-item">
                         <Link
@@ -84,20 +99,25 @@ const Menu = ({ history })=>{
                             Signup
                         </Link>
                 </li>
-                <li className="nav-item">
-                <span
+
+                </>
+            )}
+
+            {isAuthenticated() && ( //conditional link display
+            <li className="nav-item">
+                <span   //used span tag because i don't want to rediceret it to any other page
                     className="nav-link text-light"
                     style={{ cursor: "pointer", color: "#de870d" }}
                     onClick={() =>
                         signout(() => {
-                            history.push("/");
-                        })
+                            history.push("/"); //so, in this method we can redirect the user to the homepage
+                        }) //takes a method as an argument ^
                     }
                 >
                     Signout
                 </span>
                 </li>
-
+            )}
                 </ul>
             </div>
 </nav>
