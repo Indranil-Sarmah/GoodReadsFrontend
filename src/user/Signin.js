@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import Layout from "../core/Layout";
 import { signin } from "../auth"; //important method which interacts with backend
 import { ProgressBar} from 'react-bootstrap';
-import {authenticate} from '../auth/index' //important middleware which helps to set the data to localstorage
+import {authenticate,isAuthenticated} from '../auth/index' //important middleware which helps to set the data to localstorage
 
 
 const Signin = () => {
@@ -18,6 +18,7 @@ const Signin = () => {
     });
 
     const { email, password, loading, error, redirectToReferrer,percentage } = values; //destructing the values for separate use
+    const { user } = isAuthenticated();//get the user from isAuthenticated
 
     const handleChange = name => event => { //again using high order function
         setValues({ ...values, error: false, [name]: event.target.value }); //according to change in the input feild it will reflect
@@ -88,7 +89,11 @@ const Signin = () => {
 
     const redirectUser = () => {
         if (redirectToReferrer) {
-            return <Redirect to="/" />;
+            if (user && user.role === 1) {
+                return <Redirect to="/admin/dashboard" />; //redicted to admin dashbord if admin
+            } else {
+                return <Redirect to="/user/dashboard" />; //redicte to registered user dashboard if registered user
+            }
         }
     };
 
