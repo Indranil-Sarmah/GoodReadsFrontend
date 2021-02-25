@@ -44,9 +44,6 @@ const AdminDashboard = () => {
         );
     };
 
-   
-
-
     return (
         <Layout
             title="Admin Dashboard"

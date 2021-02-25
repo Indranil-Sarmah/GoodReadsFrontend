@@ -61,10 +61,11 @@ const Dashboard = () => {
             title="Dashboard"
             description={`Have a good Day, ${name}`}
             className="container-fluid text-light"
+            
         >
             <div className="row">
-                <div className="col-md-3">{userLinks()}</div>
-                <div className="col-md-9">
+                <div className="col-md-3 offset-md-1">{userLinks()}</div>
+                <div className="col-md-7">
                     {userInfo()}
                     {purchaseHistory()}
                 </div>

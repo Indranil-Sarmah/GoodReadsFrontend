@@ -95,6 +95,10 @@ const Signin = () => {
                 return <Redirect to="/user/dashboard" />; //redicte to registered user dashboard if registered user
             }
         }
+
+        if (isAuthenticated()) {
+            return <Redirect to="/" />;
+        }
     };
 
     return (
