@@ -5,6 +5,8 @@ import Signin from "./user/Signin";//Importing Signin component
 import Home from "./core/Home";//Importing Home component
 import PrivateRoute from "./auth/PrivateRoute";//Importing private route component
 import Dashboard from "./user/UserDashboard"; //importing the dashbord
+import AdminDashboard from "./user/AdminDashboard";//Admin dashboard component imported
+import AdminRoute from "./auth/AdminRoute";//Admin route from auth
 
 
 const Routes = () => {
@@ -15,6 +17,11 @@ const Routes = () => {
                 <Route path="/signin" exact component={Signin} />
                 <Route path="/signup" exact component={Signup} />
                 <PrivateRoute path="/user/dashboard" exact component={Dashboard} />
+                <AdminRoute
+                    path="/admin/dashboard"
+                    exact
+                    component={AdminDashboard}
+                />
             </Switch>
         </BrowserRouter>
     );

@@ -70,7 +70,7 @@ export const signout = next => {
 };
 /******************************************************/
 
-/****************************isAuthendticated is method signIn users******************** */
+/************************isAuthendticated is method signIn users******************** */
 
 export const isAuthenticated = () => {
     if (typeof window == "undefined") {
