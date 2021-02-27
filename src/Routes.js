@@ -8,6 +8,7 @@ import Dashboard from "./user/UserDashboard"; //importing the dashbord
 import AdminDashboard from "./user/AdminDashboard";//Admin dashboard component imported
 import AdminRoute from "./auth/AdminRoute";//Admin route from auth
 import AddCategory from "./admin/AddCategory"; //to add category by the admin
+import AddProduct from "./admin/AddProduct";
 
 
 const Routes = () => {
@@ -27,6 +28,11 @@ const Routes = () => {
                     path="/create/category"
                     exact
                     component={AddCategory}
+                />
+                <AdminRoute
+                    path="/create/product"
+                    exact
+                    component={AddProduct}
                 />
             </Switch>
         </BrowserRouter>

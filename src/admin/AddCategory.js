@@ -2,50 +2,85 @@ import React, { useState } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
+import { createCategory } from "./apiAdmin";
 
 const AddCategory = () => {
-    const [name, setName] = useState("");//to name the category
-    const [error, setError] = useState(false);//if there is any kind of error then to handle that this use state method is used
-    const [success, setSuccess] = useState(false);//simmilar as error
+    const [name, setName] = useState("");
+    const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     // destructure user and token from localstorage
     const { user, token } = isAuthenticated();
 
-    const handleChange = e => {  //method to handle the event e
+    const handleChange = e => {
         setError("");
-        setName(e.target.value); //whatever user is typing grabing that
+        setName(e.target.value);
     };
 
-    const clickSubmit = e => { //method to submit the form
-        e.preventDefault();  //prevent page reload
+    const clickSubmit = e => {
+        e.preventDefault();
         setError("");
         setSuccess(false);
         // make request to api to create category
+        createCategory(user._id, token, { name }).then(data => {
+            if (data.error) {
+                setError(data.error);
+            } else {
+                setError("");
+                setSuccess(true);
+            }
+        });
     };
 
-    const newCategoryFom = () => (  //add a form to create a new category > clicksubmit is defined above
-        <form onSubmit={clickSubmit}> 
+    const newCategoryFom = () => (
+        <form onSubmit={clickSubmit}>
             <div className="form-group">
-                <label className="text-light">Category Name</label>
+                <label className="text-secondary"> Category Name</label>
                 <input
                     type="text"
                     className="form-control"
-                    onChange={handleChange} //to handle the change event in the input form
+                    onChange={handleChange}
                     value={name}
                     autoFocus
+                    required
                 />
             </div>
-            <button className="btn btn-warning">Create Category</button>
+            <button className="btn btn-secondary">Create Category</button>
         </form>
+    );
+
+    const showSuccess = () => {
+        if (success) {
+            return <p className="alert alert-success text-light">{name} category is created</p>;
+        }
+    };
+
+    const showError = () => {
+        if (error) {
+            return <p className="alert alert-danger text-light">Category should be unique</p>;
+        }
+    };
+
+    const goBack = () => (
+        <div className="mt-5 ">
+            <Link to="/admin/dashboard" className="text-warning" style={{"text-decoration":"none"}}>
+                Back to Dashboard
+            </Link>
+        </div>
     );
 
     return (
         <Layout
             title="Add a new category"
-            description={`${user.name}, ready to add a new category?`}
+            description={`G'day ${user.name}, ready to add a new category?`}
         >
             <div className="row">
-                <div className="col-md-8 offset-md-2">{newCategoryFom()}</div>
+                <div className="col-md-8 offset-md-2">
+                    {showSuccess()}
+                    {showError()}
+                    {newCategoryFom()}
+                    {goBack()}
+                </div>
             </div>
         </Layout>
     );
