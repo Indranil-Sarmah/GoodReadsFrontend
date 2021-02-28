@@ -10,18 +10,19 @@ const AddProduct = () => {
         name: "",
         description: "",
         price: "",
-        categories: [],
-        category: "",
+        categories: [], //pull all the categories from the backend and popluate the drop down menu
+        category: "", //single category
         shipping: "",
         quantity: "",
         photo: "",
         loading: false,
         error: "",
         createdProduct: "",
-        redirectToProfile: false,
+        redirectToProfile: false, //profile page
         formData: ""
     });
 
+    // destructure all the values form the state so it is easy to use in the form
     const {
         name,
         description,
@@ -43,9 +44,9 @@ const AddProduct = () => {
 
     const handleChange = name => event => {
         const value =
-            name === "photo" ? event.target.files[0] : event.target.value;
+            name === "photo" ? event.target.files[0] : event.target.value; //to grab files we use event.target.files[0] and for others event.target.value // checking by using ternary operator
         formData.set(name, value);
-        setValues({ ...values, [name]: value });
+        setValues({ ...values, [name]: value }); //after grabing the values setting the state
     };
 
     const clickSubmit = event => {
@@ -60,7 +61,7 @@ const AddProduct = () => {
                     <input
                         onChange={handleChange("photo")}
                         type="file"
-                        name="photo"
+                        name="photo" //to update the backend
                         accept="image/*"
                         className="bg-secondary p-0"
                     />
