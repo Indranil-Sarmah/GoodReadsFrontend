@@ -45,18 +45,47 @@ const AddProduct = () => {
     const handleChange = name => event => {
         const value =
             name === "photo" ? event.target.files[0] : event.target.value; //to grab files we use event.target.files[0] and for others event.target.value // checking by using ternary operator
-        formData.set(name, value);
+        formData.set(name, value); //form data api available in browsers
         setValues({ ...values, [name]: value }); //after grabing the values setting the state
     };
 
     const clickSubmit = event => {
-        //
+        event.preventDefault();
+        setValues({ ...values, error: "", loading: true });
+
+        createProduct(user._id, token, formData).then(data => {
+            if (data.error) {
+                setValues({ ...values, error: data.error });
+            } else {
+                setValues({
+                    ...values,
+                    name: "",
+                    description: "",
+                    photo: "",
+                    price: "",
+                    quantity: "",
+                    loading: false,
+                    createdProduct: data.name
+                });
+            }
+        });
     };
+
+    const goBack = () => (
+        <div className="mt-5 ">
+            <Link to="/admin/dashboard" className="text-warning" style={{"text-decoration":"none"}}>
+                Back to Dashboard
+            </Link>
+        </div>
+    );
 
     const newPostForm = () => (
         <form className="mb-5" onSubmit={clickSubmit}>
+            <div className="float-right">{goBack()}</div>
+            
             <h4>Post Photo</h4>
             <div className="form-group p-0">
+            
                 <label className="btn btn-secondary">
                     <input
                         onChange={handleChange("photo")}
@@ -65,7 +94,9 @@ const AddProduct = () => {
                         accept="image/*"
                         className="bg-secondary p-0"
                     />
+                     
                 </label>
+               
             </div>
 
             <div className="form-group">
@@ -139,7 +170,9 @@ const AddProduct = () => {
         >
             <div className="row">
                 <div className="col-md-6 offset-md-3">{newPostForm()}</div>
+               
             </div>
+           
         </Layout>
     );
 };

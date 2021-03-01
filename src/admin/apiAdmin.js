@@ -18,6 +18,7 @@ export const createCategory = (userId, token, category) => {
         });
 };
 
+//this method will talk to backend and add the product in dataase
 export const createProduct = (userId, token, product) => {
     return fetch(`${API}/product/create/${userId}`, {
         method: "POST",
