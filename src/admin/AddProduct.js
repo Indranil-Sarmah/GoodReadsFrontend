@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
-import { createProduct } from "./apiAdmin";
+import { createProduct,getCategories } from "./apiAdmin";
 
 const AddProduct = () => {
     const { user, token } = isAuthenticated();
@@ -38,8 +38,23 @@ const AddProduct = () => {
         formData
     } = values;
 
+    // load categories and set form data
+    const init = () => {
+        getCategories().then(data => {
+            if (data.error) {
+                setValues({ ...values, error: data.error });
+            } else {
+                setValues({
+                    ...values,
+                    categories: data,
+                    formData: new FormData()
+                });
+            }
+        });
+    };
+
     useEffect(() => {
-        setValues({ ...values, formData: new FormData() });
+        init();
     }, []);
 
     const handleChange = name => event => {
@@ -73,7 +88,7 @@ const AddProduct = () => {
 
     const goBack = () => (
         <div className="mt-5 ">
-            <Link to="/admin/dashboard" className="text-warning" style={{"text-decoration":"none"}}>
+            <Link to="/admin/dashboard" className="text-warning" style={{"textDecoration":"none"}}>
                 Back to Dashboard
             </Link>
         </div>
@@ -134,7 +149,13 @@ const AddProduct = () => {
                     onChange={handleChange("category")}
                     className="form-control p-1"
                 >
-                    <option  value="">python</option>
+                   <option>Please select</option>
+                    {categories &&
+                        categories.map((c, i) => (
+                            <option key={i} value={c._id}>
+                                {c.name}
+                            </option>
+                    ))}
                 </select>
             </div>
 
