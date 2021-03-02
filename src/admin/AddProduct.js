@@ -3,6 +3,7 @@ import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { createProduct,getCategories } from "./apiAdmin";
+import { ProgressBar} from 'react-bootstrap';
 
 const AddProduct = () => {
     const { user, token } = isAuthenticated();
@@ -165,6 +166,7 @@ const AddProduct = () => {
                     onChange={handleChange("shipping")}
                     className="form-control p-2"
                 >
+                    <option>Please select</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -184,13 +186,51 @@ const AddProduct = () => {
         </form>
     );
 
+
+    const showError = () => (
+        <div
+            className="alert alert-danger"
+            style={{ display: error ? "" : "none" }}
+        >
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div
+            className="alert alert-info"
+            style={{ display: createdProduct ? "" : "none" }}
+        >
+            {`${createdProduct}`} is created
+        </div>
+    );
+
+    const percentage =73;
+
+    const showLoading = () =>
+    loading && (
+        
+        <div className="progressBar p-2">
+                <ProgressBar now={percentage} animated/>
+         </div>
+    );
+
     return (
         <Layout
             title="Add a new product"
             description={`G'day ${user.name}, ready to add a new product?`}
         >
             <div className="row">
-                <div className="col-md-6 offset-md-3">{newPostForm()}</div>
+                <div className="col-md-6 offset-md-3">
+                    <div className="m-1">
+                    {showLoading()}
+                    {showSuccess()}
+                    {showError()}
+                    
+                    {newPostForm()}
+                    </div>
+                    
+                </div>
                
             </div>
            

@@ -61,6 +61,8 @@ const AddCategory = () => {
         }
     };
 
+    
+
     const goBack = () => (
         <div className="mt-5 ">
             <Link to="/admin/dashboard" className="text-warning" style={{"textDecoration":"none"}}>
