@@ -38,9 +38,9 @@ const Home = () => {
  
 
     return (
-        <Layout title="Home Page" description="An E-commerce App fro books">
+        <Layout title="Home Page" description="An E-commerce App for books">
           
-            <h2 className="mb-4 ml-3">New Arrivals</h2>
+            <h3 className="mb-2 ml-4 text-light">New Arrivals</h3>
             <div className="row m-1">
                
                 {productsByArrival.map((product, i) => (
@@ -50,7 +50,7 @@ const Home = () => {
             </div>  
            
 
-            <h2 className="mb-4 ml-3">Best Sellers</h2>
+            <h3 className="mb-4 ml-4 text-light">Best Sellers</h3>
          
             <div className="row m-1">  
                 {productsBySell.map((product, i) => (
