@@ -9,6 +9,8 @@ import AdminDashboard from "./user/AdminDashboard";//Admin dashboard component i
 import AdminRoute from "./auth/AdminRoute";//Admin route from auth
 import AddCategory from "./admin/AddCategory"; //to add category by the admin
 import AddProduct from "./admin/AddProduct";
+import Shop from "./core/Shop";
+
 
 
 const Routes = () => {
@@ -16,6 +18,7 @@ const Routes = () => {
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Home} />
+                <Route path="/shop" exact component={Shop} />
                 <Route path="/signin" exact component={Signin} />
                 <Route path="/signup" exact component={Signup} />
                 <PrivateRoute path="/user/dashboard" exact component={Dashboard} />

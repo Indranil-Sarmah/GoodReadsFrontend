@@ -56,7 +56,7 @@ const Menu = ({ history })=>{
             <div className="collapse navbar-collapse" id="navbarColor01">
                 <ul className="navbar-nav mr-auto">
               
-                <li className="nav-item">
+                    <li className="nav-item">
                         <Link
                             className="nav-link"
                             style={isActive(history, "/")}
@@ -65,6 +65,17 @@ const Menu = ({ history })=>{
                             Home
                         </Link>
                     </li>
+
+                    <li className="nav-item">
+                        <Link
+                            className="nav-link"
+                            style={isActive(history, "/shop")}
+                            to="/shop"
+                        >
+                            Shop
+                        </Link>
+                    </li>
+
 
                     {isAuthenticated() && isAuthenticated().user.role === 0 && (
                 <li className="nav-item">

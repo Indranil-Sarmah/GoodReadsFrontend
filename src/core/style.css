@@ -1,9 +1,62 @@
-
-@media only screen and (max-width: 600px) {
+@media (min-width: 1200px) {
     .jumbotron h2 {
-        margin-top: 10px;
+        margin-top: 0px;
+    }
+
+    .jumbotron {
+        padding: 0px;
+    }
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .jumbotron h2 {
+        margin-top: 0px;
+    }
+
+    .jumbotron {
+        padding: 0px;
+    }
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+    .jumbotron h2 {
+        margin-top: 0px;
+    }
+
+    .jumbotron {
+        padding: 0px;
+    }
+
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+    .jumbotron h2 {
+        margin-top: 0px;
+    }
+
+    .jumbotron {
+        padding: 0px;
+    }
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    .jumbotron h2 {
+        margin-top: 0px;
+    }
+
+    .jumbotron {
+        padding: 0px;
     }
 }
+
 
 /**
  * jumbotron animation
@@ -24,7 +77,7 @@
     width: 30wh;
     height: 15vh;
     color: #fff;
-    background: linear-gradient(-45deg, #f5cd49, #a59b9f, #f0bd94, #c05d0c);
+    background: linear-gradient(-45deg, #a59b9f, #c05d0c);
     background-size: 400% 400%;
     -webkit-animation: Gradient 15s ease infinite;
     -moz-animation: Gradient 15s ease infinite;
