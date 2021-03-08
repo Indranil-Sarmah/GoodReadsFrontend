@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const RadioBox = ({ prices }) => {  //grab price as props from shop component
+const RadioBox = ({ prices,handleFilters }) => {  //grab price as props from shop component
     const [value, setValue] = useState(0);
 
-    const handleChange = () => {
-        //
+    const handleChange = (event) => {
+        handleFilters(event.target.value);
+        setValue(event.target.value);
     };
 
     return prices.map((p, i) => (
@@ -12,6 +13,7 @@ const RadioBox = ({ prices }) => {  //grab price as props from shop component
             <input
                 onChange={handleChange}
                 value={`${p._id}`}
+                name={p}  //to select only one radio button
                 type="radio"
                 className="mr-2 ml-4"
             />
