@@ -4,7 +4,7 @@ const RadioBox = ({ prices,handleFilters }) => {  //grab price as props from sho
     const [value, setValue] = useState(0);
 
     const handleChange = (event) => {
-        handleFilters(event.target.value);
+        handleFilters(event.target.value); //any time ther is change in input type radio we have to update it
         setValue(event.target.value);
     };
 
