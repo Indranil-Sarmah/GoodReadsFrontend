@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import Card from "./Card";
-import { getCategories } from "./apiCore";
+import { getCategories,getFilteredProducts } from "./apiCore";
 import Checkbox from "./Checkbox";
 import { prices } from "./fixedPrices";
 import RadioBox from "./RadioBox";
@@ -15,6 +15,9 @@ const Shop = () => {
 
     const [categories, setCategories] = useState([]); //state to hold the catefgories from backend
     const [error, setError] = useState(false);
+    const [limit, setLimit] = useState(6);
+    const [skip, setSkip] = useState(0);
+    const [filteredResults, setFilteredResults] = useState([]);
 
     const init = () => {   //this will run automatically when components mount and load the categories using getCategories
         getCategories().then(data => {
@@ -26,8 +29,20 @@ const Shop = () => {
         });
     };
 
+    const loadFilteredResults = newFilters => {
+        // console.log(newFilters);
+        getFilteredProducts(skip, limit, newFilters).then(data => {
+            if (data.error) {
+                setError(data.error);
+            } else {
+                setFilteredResults(data);
+            }
+        });
+    };
+
     useEffect(() => {
         init();
+        loadFilteredResults(skip, limit, myFilters.filters);
     }, []); //when components mount
 
     const handleFilters = (filters, filterBy) => { //filters and filtersBy
@@ -39,18 +54,18 @@ const Shop = () => {
             let priceValues = handlePrice(filters);
             newFilters.filters[filterBy] = priceValues; //whatever we have selected for the price
         }
-
+        loadFilteredResults(myFilters.filters);//this will load the products according to the filters
         setMyFilters(newFilters);
     };
 
     //extract the value out of the array fixedPrices
     const handlePrice = value => {
         const data = prices;
-        let array = [];
+        let array = []; //the price range defined in the array of fixedPrices
 
         for (let key in data) {
             if (data[key]._id === parseInt(value)) {
-                array = data[key].array;
+                array = data[key].array; //assigining
             }
         }
         return array;
