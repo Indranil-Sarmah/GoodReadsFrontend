@@ -43,7 +43,7 @@ const Shop = () => {
     useEffect(() => {
         init();
         loadFilteredResults(skip, limit, myFilters.filters);
-    }, []); //when components mount
+    }, []); //when components mount //test comment
 
     const handleFilters = (filters, filterBy) => { //filters and filtersBy
         //console.log("SHOP", filters, filterBy);
