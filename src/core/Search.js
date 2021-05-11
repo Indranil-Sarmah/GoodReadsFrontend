@@ -37,14 +37,14 @@ const Search = () => {
 
     const searchForm = () => (
         <form onSubmit={searchSubmit}>
-            <span className="input-group-text">
-                <div className="input-group input-group-lg">
+            <span className="input-group-text bg-primary pr-4 pl-4 pt-0 pb-0 m-2 border border-primary">
+                <div className="input-group input-group-sm">
                     <div className="input-group-prepend">
                         <select
-                            className="btn mr-2"
+                            className="btn btn-sm mr-1 p-0"
                             onChange={handleChange("category")}
                         >
-                            <option value="All">Pick Category</option>
+                            <option value="All" className="text-warning">Pick Category</option>
                             {categories.map((c, i) => (
                                 <option key={i} value={c._id}>
                                     {c.name}
@@ -64,7 +64,7 @@ const Search = () => {
                     className="btn input-group-append"
                     style={{ border: "none" }}
                 >
-                    <button className="input-group-text">Search</button>
+                    <button className="input-group-text pt-0 pb-0 pl-1 pr-1 small">Search</button>
                 </div>
             </span>
         </form>

@@ -40,7 +40,7 @@ const Home = () => {
 
     return (
         <Layout title="Home Page" description="An E-commerce App for books">
-          
+            <Search/>
             <h3 className="mb-2 ml-4 text-light">New Arrivals</h3>
             <div className="row m-1">
                
