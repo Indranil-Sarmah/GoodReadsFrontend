@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "./Layout";
-import { getCart } from "./cartHelpers";
-import Card from "./Card";
+import { getCart } from "./cartHelper";
+import CartCard from "./CartCard";
 
 const Cart = () => {
     const [items, setItems] = useState([]);
@@ -14,33 +14,33 @@ const Cart = () => {
     const showItems = items => {
         return (
             <div>
-                <h2>Your cart has {`${items.length}`} items</h2>
+                <h5 className="ml-3">Your cart has {`${items.length}`} items</h5>
                 <hr />
                 {items.map((product, i) => (
-                    <Card key={i} product={product} />
+                    <CartCard key={i} product={product} cartUpdate={true}/>
                 ))}
             </div>
         );
     };
 
     const noItemsMessage = () => (
-        <h2>
+        <p>
             Your cart is empty. <br /> <Link to="/shop">Continue shopping</Link>
-        </h2>
+        </p>
     );
 
     return (
         <Layout
             title="Shopping Cart"
-            description="Manage your cart items. Add remove checkout or continue shopping."
+            description="Manage your cart items."
             className="container-fluid"
         >
             <div className="row">
-                <div className="col-6">
+                <div className="col-sm-12 col-lg-6 col-md-12">
                     {items.length > 0 ? showItems(items) : noItemsMessage()}
                 </div>
 
-                <div className="col-6">
+                <div className="col-lg-4">
                     <p>
                         show checkout options/shipping address/total/update
                         quantity

@@ -86,7 +86,7 @@ const Menu = ({ history })=>{
                         >
                             Cart{" "}
                             <sup>
-                                <small className="cart-badge">{itemTotal()}</small>
+                                <small className="cart-badge text-light">{itemTotal()}</small>
                             </sup>
                         </Link>
                     </li>
