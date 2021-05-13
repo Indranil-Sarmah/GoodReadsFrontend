@@ -76,7 +76,7 @@ const Search = () => {
     };
 
     const searchForm = () => (
-        <form onSubmit={searchSubmit}>
+        <form onSubmit={searchSubmit} style={{"margin-bottom":"0px"}}>
             <span className="input-group-text bg-primary pr-4 pl-4 pt-0 pb-0 m-1 border border-primary col-12">
                 <div className="input-group input-group-sm">
                     <div className="input-group-prepend">
@@ -113,7 +113,7 @@ const Search = () => {
     return (
         <div className="row">
             <div className="container mb-3">{searchForm()}</div>
-            <div className="container-fluid mb-3 m-4">
+            <div className="container-fluid m-3">
                 {searchedProducts(results)}
             </div>
         </div>
