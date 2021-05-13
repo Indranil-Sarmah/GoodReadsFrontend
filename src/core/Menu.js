@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link,withRouter} from 'react-router-dom'
 import { signout,isAuthenticated } from "../auth";
+import { itemTotal } from "./cartHelper";
+import './style.css'
 
 const isActive = (history, path) => { //show the current navigation tab 
     if (history.location.pathname === path) { //browser functionality
@@ -76,9 +78,23 @@ const Menu = ({ history })=>{
                         </Link>
                     </li>
 
+                    <li className="nav-item">
+                        <Link
+                            className="nav-link"
+                            style={isActive(history, "/cart")}
+                            to="/cart"
+                        >
+                            Cart{" "}
+                            <sup>
+                                <small className="cart-badge">{itemTotal()}</small>
+                            </sup>
+                        </Link>
+                    </li>
+                    
+
 
                     {isAuthenticated() && isAuthenticated().user.role === 0 && (
-                <li className="nav-item">
+                    <li className="nav-item">
                     <Link
                         className="nav-link"
                         style={isActive(history, "/user/dashboard")}

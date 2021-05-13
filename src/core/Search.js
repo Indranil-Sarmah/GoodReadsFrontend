@@ -112,8 +112,8 @@ const Search = () => {
 
     return (
         <div className="row">
-            <div className="container mb-3">{searchForm()}</div>
-            <div className="container-fluid m-3">
+            <div className="container mb-2">{searchForm()}</div>
+            <div className="container-fluid">
                 {searchedProducts(results)}
             </div>
         </div>
