@@ -2,12 +2,12 @@ import React ,  {useState} from "react";
 import { Link,Redirect } from "react-router-dom";
 import ShowImage from "./ShowImage";
 import './style.css'
-import { updateItem } from "./cartHelper";
+import { updateItem,removeItem} from "./cartHelper";
 
 
 
 
-const CartCard = ({ product,showViewProductButton = true,cartUpdate = false}) => {
+const CartCard = ({ product,showViewProductButton = true,cartUpdate = false,showRemoveProductButton = false}) => {
 
     
     const [count, setCount] = useState(product.count);
@@ -20,6 +20,19 @@ const CartCard = ({ product,showViewProductButton = true,cartUpdate = false}) =>
                             View Product
                     </button>
                 </Link>
+            )
+        );
+    };
+
+    const showRemoveButton = showRemoveProductButton => {
+        return (
+            showRemoveProductButton && (
+                <button
+                    onClick={() => removeItem(product._id)}
+                    className="btn btn-sm btn-danger mt-2"
+                >
+                    Remove Product
+                </button>
             )
         );
     };
@@ -60,9 +73,8 @@ const CartCard = ({ product,showViewProductButton = true,cartUpdate = false}) =>
                 <span >{showCartUpdateOptions(cartUpdate)}</span>
                 </div>
                 <div>
-                    <Link to={`/product/${product._id}`}>
                         {showViewButton(showViewProductButton)} 
-                    </Link>
+                        {showRemoveButton(showRemoveProductButton)}
                 </div>
             </div>
         

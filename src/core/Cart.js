@@ -9,24 +9,24 @@ const Cart = () => {
 
     useEffect(() => {
         setItems(getCart());
-    }, []);
+    }, [items]);
 
     const showItems = items => {
         return (
             <div>
-                <h5 className="ml-3">Your cart has {`${items.length}`} items</h5>
-                <hr />
+                <h5 className="ml-3 text-light">Your cart has {`${items.length}`} items</h5>
+                <hr className="bg-light"/>
                 {items.map((product, i) => (
-                    <CartCard key={i} product={product} cartUpdate={true}/>
+                    <CartCard key={i} product={product} cartUpdate={true} showRemoveProductButton={true}/>
                 ))}
             </div>
         );
     };
 
     const noItemsMessage = () => (
-        <p>
-            Your cart is empty. <br /> <Link to="/shop">Continue shopping</Link>
-        </p>
+        <h5 className="text-light">
+            Your cart is empty. <br/><br/><br/> <Link to="/shop" className="text-warning font-weight-light">Continue shopping</Link>
+        </h5>
     );
 
     return (
